@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <button id="themeToggle" class="theme-toggle">
+      <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M565-395q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Zm-226.5 56.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/></svg>
+    </button>
+</div>
+  
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn" data-mode="stopwatch">Stopwatch</button>
+    <button class="tab-btn active" data-mode="timer">Timer</button>
+    <button class="tab-btn" data-mode="clock">Clock</button>
+  </div>
+  <!-- Stopwatch Mode -->
+  <div id="stopwatch" class="mode-content">
+    <h1 id="stopwatchDisplay">00:00:00:00</h1>
+    <button id="stopwatchPlayPause">Start</button>
+    <button id="stopwatchReset">Reset</button>
+  </div>
+  <!-- Timer Mode -->
+  <div id="timer" class="mode-content active">
+    <div class="timer-setup-box">
+      <div class="preset-buttons">
+        <button class="preset" data-seconds="1">1 second</button>
+        <button class="preset" data-seconds="5">5 seconds</button>
+        <button class="preset" data-seconds="15">15 seconds</button>
+        <button class="preset" data-seconds="60">1 min</button>
+        <button class="preset" data-seconds="300">5 mins</button>
+        <button class="preset" data-seconds="900">15 mins</button>
+        <button class="preset" data-seconds="3600">1 hour</button>
+      </div>
+    </div>
+    <div class="timers-grid" id="timersGrid"></div>
+  </div>
+  <!-- Clock Mode -->
+  <div id="clock" class="mode-content">
+    <h1 id="clockDisplay">00:00:00</h1>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

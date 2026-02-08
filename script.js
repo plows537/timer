@@ -247,11 +247,66 @@ const clockDisplay = document.getElementById("clockDisplay");
 
 function updateClock() {
     const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
+    const hour = now.getHours();
+    const hours = String(hour % 12 || 12).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     clockDisplay.textContent = `${hours}:${minutes}:${seconds}`;
 }
 
 updateClock();
-setInterval(updateClock, 1000);
+setInterval(updateClock, 100);
+
+// ===== FULLSCREEN MODE =====
+let isFullscreenMode = false;
+let fullscreenOverlay = null;
+
+stopwatchDisplay.addEventListener("click", () => {
+    toggleFullscreen(stopwatchDisplay);
+});
+
+clockDisplay.addEventListener("click", () => {
+    toggleFullscreen(clockDisplay);
+});
+
+function toggleFullscreen(element) {
+    if (isFullscreenMode) {
+        fullscreenOverlay.remove();
+        fullscreenOverlay = null;
+        isFullscreenMode = false;
+    } else {
+        fullscreenOverlay = document.createElement("div");
+        fullscreenOverlay.style.position = "fixed";
+        fullscreenOverlay.style.top = "0";
+        fullscreenOverlay.style.left = "0";
+        fullscreenOverlay.style.width = "100vw";
+        fullscreenOverlay.style.height = "100vh";
+        fullscreenOverlay.style.display = "flex";
+        fullscreenOverlay.style.justifyContent = "center";
+        fullscreenOverlay.style.alignItems = "center";
+        fullscreenOverlay.style.backgroundColor = "var(--bg-dark)";
+        fullscreenOverlay.style.zIndex = "10000";
+        fullscreenOverlay.style.fontSize = "20vw";
+        fullscreenOverlay.style.color = "var(--text)";
+        
+        const timeDisplay = document.createElement("div");
+        timeDisplay.textContent = element.textContent;
+        fullscreenOverlay.appendChild(timeDisplay);
+        
+        fullscreenOverlay.addEventListener("click", () => {
+            toggleFullscreen(element);
+        });
+        
+        document.body.appendChild(fullscreenOverlay);
+        
+        const updateInterval = setInterval(() => {
+            if (!isFullscreenMode) {
+                clearInterval(updateInterval);
+                return;
+            }
+            timeDisplay.textContent = element.textContent;
+        }, 10);
+        
+        isFullscreenMode = true;
+    }
+}
